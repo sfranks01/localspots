@@ -14,38 +14,55 @@ struct SwipeCardView: View {
                 .fill(.white)
                 .shadow(radius: 5)
 
-            VStack(alignment: .leading, spacing: 16) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(place.name)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(.primary)
+            VStack(spacing: 0) {
+                // Image at top
+                PlaceImageView(
+                    imageName: place.imageName,
+                    width: 340,
+                    height: 240,
+                    cornerRadius: 0
+                )
+                .clipShape(UnevenRoundedRectangle(
+                    topLeadingRadius: 20,
+                    topTrailingRadius: 20
+                ))
 
-                    Text(place.subcategory)
-                        .font(.headline)
-                        .foregroundColor(.secondary)
+                // Content at bottom
+                VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(place.name)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundColor(.primary)
+                            .lineLimit(2)
 
-                    Text(place.address)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .lineLimit(2)
-                }
+                        Text(place.subcategory)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
 
-                Spacer()
-
-                HStack {
-                    Label("Swipe left to skip", systemImage: "xmark")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        Text(place.address)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .lineLimit(2)
+                    }
 
                     Spacer()
 
-                    Label("Swipe right to save", systemImage: "heart.fill")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                    HStack {
+                        Label("Swipe left to skip", systemImage: "xmark")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+
+                        Spacer()
+
+                        Label("Swipe right to save", systemImage: "heart.fill")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                 }
+                .padding(20)
+                .frame(height: 240)
             }
-            .padding(24)
         }
         .frame(width: 340, height: 480)
         .offset(x: offset.width, y: offset.height * 0.4)

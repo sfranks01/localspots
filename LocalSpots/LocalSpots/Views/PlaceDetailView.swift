@@ -10,12 +10,22 @@ struct PlaceDetailView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
-                Map(initialPosition: .region(region)) {
-                    Marker(place.name, coordinate: coordinate)
-                }
-                .frame(height: 250)
-                .cornerRadius(12)
+            VStack(alignment: .leading, spacing: 0) {
+                // Hero image at top
+                PlaceImageView(
+                    imageName: place.imageName,
+                    width: nil,
+                    height: 300,
+                    cornerRadius: 0
+                )
+
+                VStack(alignment: .leading, spacing: 24) {
+                    Map(initialPosition: .region(region)) {
+                        Marker(place.name, coordinate: coordinate)
+                    }
+                    .frame(height: 200)
+                    .cornerRadius(12)
+                    .padding(.top, 16)
 
                 VStack(alignment: .leading, spacing: 16) {
                     Text(place.name)
@@ -93,10 +103,12 @@ struct PlaceDetailView: View {
                                 .fontWeight(.semibold)
                         }
                     }
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
             }
         }
+        .ignoresSafeArea(edges: .top)
         .navigationBarTitleDisplayMode(.inline)
         .alert("Mark as Visited?", isPresented: $showingVisitConfirmation) {
             Button("Cancel", role: .cancel) { }

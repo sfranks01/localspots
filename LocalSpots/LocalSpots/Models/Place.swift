@@ -15,6 +15,7 @@ final class Place: Identifiable {
     var phoneNumber: String?
     var priceLevel: Int?
     var notes: String?
+    var imageName: String?
 
     init(
         id: UUID = UUID(),
@@ -28,7 +29,8 @@ final class Place: Identifiable {
         address: String,
         phoneNumber: String? = nil,
         priceLevel: Int? = nil,
-        notes: String? = nil
+        notes: String? = nil,
+        imageName: String? = nil
     ) {
         self.id = id
         self.name = name
@@ -42,6 +44,7 @@ final class Place: Identifiable {
         self.phoneNumber = phoneNumber
         self.priceLevel = priceLevel
         self.notes = notes
+        self.imageName = imageName
     }
 
     func markAsVisited() {
