@@ -14,7 +14,7 @@ struct PlaceDetailView: View {
                 // Hero image at top
                 PlaceImageView(
                     imageName: place.imageName,
-                    width: nil,
+                    width: UIScreen.main.bounds.width,
                     height: 300,
                     cornerRadius: 0
                 )
@@ -26,20 +26,24 @@ struct PlaceDetailView: View {
                     .frame(height: 200)
                     .cornerRadius(12)
                     .padding(.top, 16)
+                    .padding(.horizontal)
 
                 VStack(alignment: .leading, spacing: 16) {
                     Text(place.name)
                         .font(.title)
                         .fontWeight(.bold)
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
 
                     HStack {
                         Label(place.subcategory, systemImage: categoryIcon)
                             .font(.headline)
                             .foregroundColor(.secondary)
+                            .lineLimit(1)
 
                         Spacer()
 
-                        if place.status == .visited, let lastVisited = place.lastVisitedDate {
+                        if place.status == .visited, let _ = place.lastVisitedDate {
                             HStack(spacing: 4) {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundColor(.green)
@@ -55,6 +59,8 @@ struct PlaceDetailView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         Label(place.address, systemImage: "mappin.and.ellipse")
                             .font(.body)
+                            .lineLimit(nil)
+                            .fixedSize(horizontal: false, vertical: true)
 
                         if let phone = place.phoneNumber {
                             Label(phone, systemImage: "phone.fill")
