@@ -6,12 +6,12 @@ struct SwipeCardView: View {
     let onSwipeRight: () -> Void
 
     @State private var offset = CGSize.zero
-    @State private var color: Color = .black
+    @State private var color: Color = .gray
 
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .fill(.white)
+                .fill(Color(.systemBackground))
                 .shadow(radius: 5)
 
             VStack(spacing: 0) {
@@ -95,7 +95,7 @@ struct SwipeCardView: View {
         case 130...500:
             color = .green
         default:
-            color = .black
+            color = .gray
         }
     }
 
